@@ -28,6 +28,8 @@ class Game {
 		while (state.isFinished() == false) {
 			nextMove();
 		}
+		board.paint();
+		out.println("finished!");
 	}
 
 	private void nextMove() {

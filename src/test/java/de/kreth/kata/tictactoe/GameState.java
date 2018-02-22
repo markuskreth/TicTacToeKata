@@ -7,6 +7,7 @@ public class GameState {
 	Player next;
 	boolean finished = false;
 	Player[][] state = new Player[3][3];
+	Player winner = null;
 
 	public GameState() {
 		this(Player.values()[(int) Math.round(Math.random())]);
@@ -49,6 +50,10 @@ public class GameState {
 		private Player(char sign) {
 			this.sign = sign;
 		}
+		@Override
+		public String toString() {
+			return String.valueOf(sign);
+		}
 	}
 
 	public void set(char[] charArray) {
@@ -82,6 +87,36 @@ public class GameState {
 		default:
 			throw new IllegalArgumentException("Second Argument must be letter of A, B or C, was: " + Arrays.toString(charArray));
 		}
-		next = next == Player.PLAYER1 ? Player.PLAYER2 : Player.PLAYER1;
+		checkWinner();
+		if(winner == null) {
+			next = next == Player.PLAYER1 ? Player.PLAYER2 : Player.PLAYER1;
+		}
+	}
+
+	private void checkWinner() {
+		for (int i=0; i<3; i++) {
+			if(next.equals(state[i][0])&&next.equals(state[i][1])&&next.equals(state[i][2])) {
+				winner = next;
+				finished = true;
+				return;
+			}
+			if(next.equals(state[0][i])&&next.equals(state[1][i])&&next.equals(state[2][i])) {
+				winner = next;
+				finished = true;
+				return;
+			}
+		}
+
+		if(next.equals(state[0][0])&&next.equals(state[1][1])&&next.equals(state[2][2])) {
+			winner = next;
+			finished = true;
+			return;
+		}
+		
+		if(next.equals(state[0][2])&&next.equals(state[1][1])&&next.equals(state[2][0])) {
+			winner = next;
+			finished = true;
+			return;
+		}
 	}
 }
