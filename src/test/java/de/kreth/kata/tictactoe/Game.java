@@ -30,6 +30,9 @@ class Game {
 		}
 		board.paint();
 		out.println("finished!");
+		if(state.winner != null) {
+			out.println(state.winner.name() + " has won!");
+		}
 	}
 
 	private void nextMove() {
