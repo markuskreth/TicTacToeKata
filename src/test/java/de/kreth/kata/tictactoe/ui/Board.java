@@ -2,12 +2,16 @@ package de.kreth.kata.tictactoe.ui;
 
 import java.io.PrintStream;
 
+import de.kreth.kata.tictactoe.GameState;
+
 public class Board {
 
 	private PrintStream out;
+	private GameState state;
 
-	public Board(PrintStream out) {
+	public Board(PrintStream out, GameState state) {
 		this.out = out;
+		this.state = state;
 	}
 
 	public void paint() {
