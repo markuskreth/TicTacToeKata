@@ -3,6 +3,7 @@ package de.kreth.kata.tictactoe.ui;
 import java.io.PrintStream;
 
 import de.kreth.kata.tictactoe.GameState;
+import de.kreth.kata.tictactoe.GameState.Player;
 
 public class Board {
 
@@ -16,10 +17,22 @@ public class Board {
 
 	public void paint() {
 		out.println(" A B C");
-		out.println("0 | | ");
+		printLine(0);
 		out.println(" -+-+-");
-		out.println("1 | | ");
+		printLine(1);
 		out.println(" -+-+-");
-		out.println("2 | | ");
+		printLine(2);
+	}
+
+	private void printLine(int i) {
+		Player[][] current = state.currentState();
+		out.print(i);
+		out.print(current[i][0]==null?' ':current[i][0].getSign());
+		out.print('|');
+		out.print(current[i][1]==null?' ':current[i][1].getSign());
+		out.print('|');
+		out.print(current[i][2]==null?' ':current[i][2].getSign());
+		out.println();
+		
 	}
 }

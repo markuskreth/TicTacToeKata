@@ -9,14 +9,21 @@ public class GameState {
 	Player[][] state = new Player[3][3];
 
 	public GameState() {
-		int index = (int) Math.round(Math.random());
-		next = Player.values()[index];
+		this(Player.values()[(int) Math.round(Math.random())]);
+	}
+
+	public GameState(Player player) {
+		next = player;
 	}
 
 	public String getNext() {
 		return next.name();
 	}
 
+	public Player[][] currentState() {
+		return state;
+	}
+	
 	public boolean isFinished() {
 		if (!finished) {
 			finished = true;
@@ -36,6 +43,9 @@ public class GameState {
 		PLAYER1('X'), 
 		PLAYER2('O');
 		char sign;
+		public char getSign() {
+			return sign;
+		}
 		private Player(char sign) {
 			this.sign = sign;
 		}
