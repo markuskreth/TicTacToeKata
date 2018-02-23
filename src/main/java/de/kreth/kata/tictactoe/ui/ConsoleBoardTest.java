@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import de.kreth.kata.tictactoe.GameState;
 import de.kreth.kata.tictactoe.GameState.Player;
 
-public class BoardTest {
+public class ConsoleBoardTest {
 
 	private GameState state;
 	private ByteArrayOutputStream stream;
@@ -20,15 +20,14 @@ public class BoardTest {
 	@BeforeEach
 	public void initBoard() {
 		state = new GameState(Player.PLAYER1);
-
 		stream = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(stream);
-		b = new Board(out, state);
+		b = new ConsoleBoard(out);
 	}
 
 	@Test
 	public void testEmptyBoard() {
-		b.paint();
+		b.paint(state);
 		String expected = 
 				" A B C\n" + 
 				"0 | | \n" + 
@@ -43,7 +42,7 @@ public class BoardTest {
 	@Test
 	public void testPlayer1OnA1() {
 		state.set("A1".toCharArray());
-		b.paint();
+		b.paint(state);
 		String expected = 
 				" A B C\n" + 
 				"0 | | \n" + 
@@ -58,7 +57,7 @@ public class BoardTest {
 	@Test
 	public void testPlayer1OnB0() {
 		state.set("B0".toCharArray());
-		b.paint();
+		b.paint(state);
 		String expected = 
 				" A B C\n" + 
 				"0 |X| \n" + 
