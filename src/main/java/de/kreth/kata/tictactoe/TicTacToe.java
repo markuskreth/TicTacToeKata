@@ -1,12 +1,13 @@
 package de.kreth.kata.tictactoe;
 
-import de.kreth.kata.tictactoe.ui.console.ConsoleBoard;
-import de.kreth.kata.tictactoe.ui.console.ConsoleInputReader;
+import de.kreth.kata.tictactoe.ui.swing.MainFrame;
 
 public class TicTacToe {
 
 	public static void main(String[] args) {
-		new Game(new ConsoleBoard(System.out), new ConsoleInputReader()).start();
+		MainFrame frame = new MainFrame();
+		frame.setVisible(true);
+		new Game(frame, frame).start();
 	}
 
 }
