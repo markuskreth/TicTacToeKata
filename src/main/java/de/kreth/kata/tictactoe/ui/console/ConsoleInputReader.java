@@ -1,6 +1,8 @@
-package de.kreth.kata.tictactoe.ui;
+package de.kreth.kata.tictactoe.ui.console;
 
 import java.util.Scanner;
+
+import de.kreth.kata.tictactoe.ui.InputReader;
 
 public class ConsoleInputReader implements InputReader {
 

@@ -6,4 +6,8 @@ public interface Board {
 
 	void paint(GameState state);
 
+	void appendState(String string);
+
+	void nextPlayer(String next);
+
 }

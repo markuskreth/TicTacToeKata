@@ -1,4 +1,4 @@
-package de.kreth.kata.tictactoe.ui;
+package de.kreth.kata.tictactoe.ui.console;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import de.kreth.kata.tictactoe.GameState;
 import de.kreth.kata.tictactoe.GameState.Player;
+import de.kreth.kata.tictactoe.ui.Board;
+import de.kreth.kata.tictactoe.ui.console.ConsoleBoard;
 
 public class ConsoleBoardTest {
 

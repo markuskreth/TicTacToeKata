@@ -1,9 +1,10 @@
-package de.kreth.kata.tictactoe.ui;
+package de.kreth.kata.tictactoe.ui.console;
 
 import java.io.PrintStream;
 
 import de.kreth.kata.tictactoe.GameState;
 import de.kreth.kata.tictactoe.GameState.Player;
+import de.kreth.kata.tictactoe.ui.Board;
 
 public class ConsoleBoard implements Board {
 
@@ -35,5 +36,17 @@ public class ConsoleBoard implements Board {
 		out.print(current[i][2]==null?' ':current[i][2].getSign());
 		out.println();
 		
+	}
+
+	@Override
+	public void appendState(String text) {
+		out.println(text);		
+	}
+
+	@Override
+	public void nextPlayer(String playerName) {
+		out.print("Kommando ");
+		out.print(playerName);
+		out.println(": ");
 	}
 }
