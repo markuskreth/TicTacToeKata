@@ -1,18 +1,12 @@
 package de.kreth.kata.tictactoe.ui.swing;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 
 import de.kreth.kata.tictactoe.GameState;
 import de.kreth.kata.tictactoe.GameState.Player;
@@ -31,48 +25,13 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		setTitle("Tic Tac Toe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(10, 10));
-		table = new JTable() {
-
-			private static final long serialVersionUID = -1189303878222667257L;
-			
-			DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
-
-				private static final long serialVersionUID = -3437518017534130933L;
-				
-				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value
-						, boolean isSelected, boolean hasFocus
-						, int row, int column) {
-					Player p = (Player) value;
-					return TicTacToeComponent.createClickComponent(p);
-				}
-			};
-			
-			@Override
-			public TableCellRenderer getCellRenderer(int row, int column) {
-				return renderer;
-			}
-		};
+		table = new TicTacToeTable(handler);
 		
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setPreferredSize(new Dimension(200, 200));
-		table.setRowHeight(75);
-		table.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int row=table.rowAtPoint(e.getPoint());
-				int col= table.columnAtPoint(e.getPoint());
-				String value = TableCoordToGameCoord.fromTable(row, col);
-				System.out.println("row=" + row + "; col=" + col + "; value: " + value);
-				handler.input = value;
-			}
-		});
 		getContentPane().add(table, BorderLayout.CENTER);
 		
 		lblStatus = new JLabel("");
 		lblStatus.setMinimumSize(new Dimension(15, 15));
-		lblStatus.setText("STATUS");
+
 		getContentPane().add(lblStatus, BorderLayout.SOUTH);
 		pack();
 	}
@@ -115,11 +74,6 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		String input;
 	}
 	
-	public static void main(String[] args) {
-		MainFrame f = new MainFrame();
-		f.paint(new GameState());
-	}
-
 	@Override
 	public void gameEnd(Player winner) {
 		StringBuilder text = new StringBuilder();
@@ -130,4 +84,10 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		}
 		JOptionPane.showMessageDialog(this, text, "Game end", JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	public static void main(String[] args) {
+		MainFrame f = new MainFrame();
+		f.paint(new GameState());
+	}
+
 }

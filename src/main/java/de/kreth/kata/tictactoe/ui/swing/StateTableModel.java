@@ -45,7 +45,7 @@ public class StateTableModel extends DefaultTableModel {
 	@Override
 	public Object getValueAt(int row, int column) {
 		if(state == null) {
-			return 0;
+			return null;
 		}
 		return state.currentState()[row][column];
 	}
