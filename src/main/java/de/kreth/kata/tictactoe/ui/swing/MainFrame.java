@@ -1,17 +1,14 @@
 package de.kreth.kata.tictactoe.ui.swing;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -41,41 +38,13 @@ public class MainFrame extends JFrame implements Board, InputReader {
 			DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
 
 				private static final long serialVersionUID = -3437518017534130933L;
-				URL xImage = getClass().getResource("../x.png");
-				URL oImage = getClass().getResource("../o.png");
 				
 				@Override
 				public Component getTableCellRendererComponent(JTable table, Object value
 						, boolean isSelected, boolean hasFocus
 						, int row, int column) {
-					ImageIcon image;
-					if(value == null) {
-						image = new ImageIcon();
-					} else {
-						Player p = (Player) value;
-						if(p==Player.PLAYER1) {
-							image = new ImageIcon(xImage);
-						} else {
-							image = new ImageIcon(oImage);
-						}
-					}
-					String action = "A1";
-					JButton btn = new JButton(image);
-					btn.setSize(25, 25);
-					btn.setPreferredSize(new Dimension(25, 25));
-					btn.setActionCommand(action);
-					btn.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							handler.input = e.getActionCommand();
-						}
-					});
-					if(isSelected) {
-						btn.setBackground(Color.BLUE);
-					}
-					
-					return btn;
+					Player p = (Player) value;
+					return TicTacToeComponent.createClickComponent(p);
 				}
 			};
 			
@@ -84,13 +53,26 @@ public class MainFrame extends JFrame implements Board, InputReader {
 				return renderer;
 			}
 		};
+		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setPreferredSize(new Dimension(200, 200));
 		table.setRowHeight(75);
+		table.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row=table.rowAtPoint(e.getPoint());
+				int col= table.columnAtPoint(e.getPoint());
+				String value = TableCoordToGameCoord.fromTable(row, col);
+				System.out.println("row=" + row + "; col=" + col + "; value: " + value);
+				handler.input = value;
+			}
+		});
 		getContentPane().add(table, BorderLayout.CENTER);
 		
 		lblStatus = new JLabel("");
 		lblStatus.setMinimumSize(new Dimension(15, 15));
+		lblStatus.setText("STATUS");
 		getContentPane().add(lblStatus, BorderLayout.SOUTH);
 		pack();
 	}
@@ -128,13 +110,12 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		return input;
 	}
 
-	private class InputHandler {
-		private String input;
+	class InputHandler {
+		String input;
 	}
 	
 	public static void main(String[] args) {
 		MainFrame f = new MainFrame();
-		f.setVisible(true);
 		f.paint(new GameState());
 	}
 }
