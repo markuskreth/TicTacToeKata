@@ -82,6 +82,7 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		if(model == null) {
 			model = new StateTableModel(state);
 			table.setModel(model);
+			setVisible(true);
 		}
 		model.fireTableDataChanged();
 	}
@@ -117,5 +118,16 @@ public class MainFrame extends JFrame implements Board, InputReader {
 	public static void main(String[] args) {
 		MainFrame f = new MainFrame();
 		f.paint(new GameState());
+	}
+
+	@Override
+	public void gameEnd(Player winner) {
+		StringBuilder text = new StringBuilder();
+		if(winner == null) {
+			text.append("Game ended even!");
+		} else {
+			text.append("Winner was: ").append(winner.name());
+		}
+		JOptionPane.showMessageDialog(this, text, "Game end", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
