@@ -20,10 +20,7 @@ class Game {
 			nextMove();
 		}
 		board.paint(state);
-		board.appendState("finished!");
-		if(state.winner != null) {
-			board.appendState(state.winner.name() + " has won!");
-		}
+		board.gameEnd(state.winner);
 	}
 
 	private void nextMove() {
