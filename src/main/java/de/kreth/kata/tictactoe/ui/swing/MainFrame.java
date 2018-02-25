@@ -26,6 +26,7 @@ public class MainFrame extends JFrame implements Board, InputReader {
 	public MainFrame() {
 		setTitle("Tic Tac Toe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout(10, 10));
 		table = new TicTacToeTable(handler);
@@ -33,7 +34,7 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
 		
 		lblStatus = new JLabel("");
-		lblStatus.setMinimumSize(new Dimension(15, 15));
+		lblStatus.setMinimumSize(new Dimension(30, 30));
 
 		contentPane.add(lblStatus, BorderLayout.SOUTH);
 		pack();

@@ -15,6 +15,30 @@ class TableCoordToGameCoordTest {
 	}
 
 	@Test
+	void testA1() {
+		int row = 0;
+		int column = 1;
+		String actual = TableCoordToGameCoord.fromTable(row, column);
+		assertEquals("A1", actual);
+	}
+
+	@Test
+	void testB2() {
+		int row = 1;
+		int column = 2;
+		String actual = TableCoordToGameCoord.fromTable(row, column);
+		assertEquals("B2", actual);
+	}
+
+	@Test
+	void testB1() {
+		int row = 1;
+		int column = 1;
+		String actual = TableCoordToGameCoord.fromTable(row, column);
+		assertEquals("B1", actual);
+	}
+
+	@Test
 	void testC2() {
 		int row = 2;
 		int column = 2;
