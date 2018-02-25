@@ -49,4 +49,14 @@ public class ConsoleBoard implements Board {
 		out.print(playerName);
 		out.println(": ");
 	}
+
+	@Override
+	public void gameEnd(Player winner) {
+		out.println("Finisched!");
+		if(winner == null) {
+			out.println("Game ended even.");
+		} else {
+			out.println("Winner: " + winner.name());
+		}
+	}
 }
