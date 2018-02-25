@@ -6,8 +6,8 @@ public class TableCoordToGameCoord {
 	}
 	public static String fromTable(int row, int column) {
 		StringBuilder result = new StringBuilder();
-		result.append((char) (row+65));
-		result.append(column);
+		result.append((char) (column+65));
+		result.append(row);
 		return result.toString();
 	}
 }

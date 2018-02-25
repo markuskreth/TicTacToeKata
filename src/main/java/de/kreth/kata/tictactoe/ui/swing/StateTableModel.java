@@ -17,21 +17,25 @@ public class StateTableModel extends DefaultTableModel {
 	public String getColumnName(int column) {
 		switch (column) {
 		case 0:
-			return "A";
+			return "";
 
 		case 1:
-			return "B";
+			return "A";
 
 		case 2:
+			return "B";
+
+		case 3:
 			return "C";
 
 		default:
 			return "###";
 		}
 	}
+	
 	@Override
 	public int getColumnCount() {
-		return state.currentState()[0].length;
+		return state.currentState()[0].length + 1;
 	}
 	
 	@Override
@@ -44,10 +48,13 @@ public class StateTableModel extends DefaultTableModel {
 	
 	@Override
 	public Object getValueAt(int row, int column) {
+		if(column == 0) {
+			return row;
+		}
 		if(state == null) {
 			return null;
 		}
-		return state.currentState()[row][column];
+		return state.currentState()[row][column-1];
 	}
 	
 	@Override
