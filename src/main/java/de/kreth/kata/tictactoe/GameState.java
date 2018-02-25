@@ -74,22 +74,27 @@ public class GameState {
 		default:
 			throw new IllegalArgumentException("First Argument must be letter of 0, 1 or 2, was: " + Arrays.toString(charArray));
 		}
+		int index;
 		switch (charArray[0]) {
 		case 'A':
-			row[0] = next;
+			index = 0;
 			break;
 		case 'B':
-			row[1] = next;
+			index = 1;
 			break;
 		case 'C':
-			row[2] = next;
+			index = 2;
 			break;
 		default:
 			throw new IllegalArgumentException("Second Argument must be letter of A, B or C, was: " + Arrays.toString(charArray));
 		}
-		checkWinner();
-		if(winner == null) {
-			next = next == Player.PLAYER1 ? Player.PLAYER2 : Player.PLAYER1;
+		if(row[index] == null) {
+
+			row[index] = next;
+			checkWinner();
+			if(winner == null) {
+				next = next == Player.PLAYER1 ? Player.PLAYER2 : Player.PLAYER1;
+			}
 		}
 	}
 
