@@ -38,6 +38,7 @@ public class TicTacToeTable  extends JTable {
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		setPreferredSize(new Dimension(250, 250));
 		setRowHeight(75);
+		
 		addMouseListener(new MouseAdapter() {
 			
 			@Override

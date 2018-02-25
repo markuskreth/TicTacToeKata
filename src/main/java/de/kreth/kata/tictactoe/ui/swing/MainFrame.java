@@ -1,11 +1,13 @@
 package de.kreth.kata.tictactoe.ui.swing;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import de.kreth.kata.tictactoe.GameState;
@@ -24,15 +26,16 @@ public class MainFrame extends JFrame implements Board, InputReader {
 	public MainFrame() {
 		setTitle("Tic Tac Toe");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout(10, 10));
+		Container contentPane = getContentPane();
+		contentPane.setLayout(new BorderLayout(10, 10));
 		table = new TicTacToeTable(handler);
 		
-		getContentPane().add(table, BorderLayout.CENTER);
+		contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
 		
 		lblStatus = new JLabel("");
 		lblStatus.setMinimumSize(new Dimension(15, 15));
 
-		getContentPane().add(lblStatus, BorderLayout.SOUTH);
+		contentPane.add(lblStatus, BorderLayout.SOUTH);
 		pack();
 	}
 
