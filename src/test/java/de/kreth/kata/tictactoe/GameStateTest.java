@@ -75,5 +75,13 @@ class GameStateTest {
 		state.set("B2".toCharArray());
 		assertEquals(Player.PLAYER1, state.state[2][1]);
 	}
+
+	@Test
+	void testSetA1Twice() {
+		char[] chars = "A1".toCharArray();
+		state.set(chars);
+		state.set(chars);
+		assertEquals(Player.PLAYER1, state.state[1][0]);
+	}
 	
 }
