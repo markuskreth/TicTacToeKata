@@ -45,6 +45,8 @@ public class MainFrame extends JFrame implements Board, InputReader {
 		if(model == null) {
 			model = new StateTableModel(state);
 			table.setModel(model);
+
+			table.getColumnModel().getColumn(0).setMaxWidth(15);
 			setVisible(true);
 		}
 		model.fireTableDataChanged();
